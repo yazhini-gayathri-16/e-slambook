@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Slam Book 💌</title>
+  <link rel="icon" href="/stickers/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Hey there!</h1>
+      <img src="/stickers/logo.png" class="logo" alt="logo">
+      
+    </div>
+    <p>I’ve made this lil e-slam book just for konjam serious fun. I’d love it if you could take a moment to fill it out for me! 🌸
+
+      Your answers will go straight into my digital memory vault 💾✨ and it’ll mean a lot to me to read your thoughts, memories, and sweet little messages.</p>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+      <div class="form-sections">
+      <div class="yourself">
+        <label>Your Name:</label>
+        <input type="text" name="name" required>
+        
+        <label>Nickname:</label>
+        <input type="text" name="nickname" required>
+
+        <label>Phone number</label>
+        <input type="text" name="phonenumber" maxlength="10" required>
+
+        <label>Instagram ID</label>
+        <input type="text" name="instagram" required>
+
+        <label>Birthday</label>
+        <input type="date" name="birthday" required>
+
+        <label>Your current obsession</label>
+        <textarea name="obsession" required></textarea>
+        
+      </div>  
+      <div class="photo">
+        <label>Upload a photo of yourself:</label>
+        <input type="file" name="photo" accept="image/png, image/jpeg, image/jpg" required>
+      </div>
+      <div class="you">
+        <h1>This your column ofc</h1>
+        <label>What is your wierd talent?</label>
+        <textarea name="talent" required></textarea>
+
+        <label>Spill your dark secret?</label>
+        <textarea name="darksecret" required></textarea>
+
+        <label>Share your favorite snack/ recipe</label>
+        <textarea name="food" required></textarea>
+
+        <label>Your favorite book/ movie/ series/ anime/ manga/ game:</label>
+        <input type="text" name="favorite" required>
+
+      </div>
+
+      <div class="Us">
+        <h1>Let's talk about us<br>[duh I am not a narcissist]</h1>
+        <label>How did we meet?</label>
+        <textarea name="howWeMet" required></textarea>
+
+        <label>Your first impression of me?</label>
+        <textarea name="firstImpression" required></textarea>
+
+        <label>Mention something chaotic that we have done together</label>
+        <textarea name="chaos" required></textarea>
+        
+        <label>What do you like about me?</label>
+        <input type="text" name="likeAboutMe" required>
+        
+        <label>What do you dislike about me?</label>
+        <input type="text" name="dislikeAboutMe" required>
+
+        <label>How would you like to call me?(my nickname given by you)</label>
+        <input type="text" name="nicknameForMe" required>
+        
+        <label>What is your favorite thing about me?</label>
+        <textarea name="favThingAboutMe" required></textarea>
+
+        <label>Favorite Memory With Me:</label>
+        <textarea name="favMemory" required></textarea>
+        
+        <label>A Message For Me:</label>
+        <textarea name="message" required></textarea>
+
+      </div>
+      </div>
+      <button type="submit">Send 💌</button>
+    </form>
+    <img src="/stickers/heart.png" class="sticker" alt="sticker">
+  </div>
+</body>
+</html>

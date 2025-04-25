@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500&display=swap');
+
+body {
+    background: #fffafc;
+    font-family: 'Poppins', sans-serif;
+    color: #5a2a6d;
+    text-align: center;
+    padding: 20px;
+}
+  
+.container {
+    background: #ffe8f0;
+    padding: 40px;
+    border-radius: 30px;
+    width: 95%;
+    max-width: none;
+    margin: auto;
+    box-shadow: 0 10px 30px rgba(255, 179, 198, 0.3);
+    min-height: 100vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    position: relative;
+    min-height: calc(100vh - 200px);
+}
+
+.form-sections {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em;
+    color: #ff5e78;
+    margin-bottom: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    border: 2px solid #ffb3c6;
+    background-color: #fff0f6;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+input, textarea {
+    width: calc(100% - 24px);
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.you h1, .Us h1 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+
+button {
+    padding: 12px 30px;
+    background-color: #ff5e78;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 5px 15px rgba(255, 94, 120, 0.3);
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 1px;
+}
+  
+button:hover {
+    background-color: #ff2e57;
+    transform: translateY(-2px);
+}
+
+.sticker {
+    margin-top: 30px;
+    width: 100px;
+    transition: transform 0.3s ease;
+}
+
+.sticker:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
+label {
+    font-size: 0.9em;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #5a2a6d;
+}
+
+.yourself, .photo, .you, .Us {
+    flex: 1;
+    min-width: 250px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 15px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+
+/* Custom scrollbar for the sections */
+.yourself::-webkit-scrollbar,
+.photo::-webkit-scrollbar,
+.you::-webkit-scrollbar,
+.Us::-webkit-scrollbar {
+    width: 8px;
+}
+
+.yourself::-webkit-scrollbar-thumb,
+.photo::-webkit-scrollbar-thumb,
+.you::-webkit-scrollbar-thumb,
+.Us::-webkit-scrollbar-thumb {
+    background-color: #ffb3c6;
+    border-radius: 4px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease;
+    margin-bottom: 3px;
+}
+
+.container p{
+    font-size: 18px;
+    color: #5a2a6d;
+    margin: 0px 40px 30px 40px;
+    text-align: center;
+    justify-content: center;
+}
+
+.logo:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.header h1 {
+    margin: 0;
+}
