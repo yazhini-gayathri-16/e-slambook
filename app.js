@@ -56,28 +56,46 @@ connectDB().then(() => {
     res.render('index');
   });
 
-  app.post('/submit', upload.single('photo'), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).send('Please select a photo');
-      }
   
-      const slamData = {
-        ...req.body,
-        photo: `/uploads/${req.file.filename}`
-      };
-  
-      const slam = new Slam(slamData);
-      await slam.save();
-      
-      res.render('thanks', { name: req.body.name });
-    } catch (error) {
-      console.error('Error saving entry:', error);
-      res.status(500).render('error', { 
-        error: error.message || 'Error saving your entry'
-      });
+app.get('/responses/:id', async (req, res) => {
+  try {
+    const slam = await Slam.findById(req.params.id);
+    if (!slam) {
+      return res.status(404).render('error', { error: 'Entry not found' });
     }
-  });
+    res.render('response', { 
+      slam,
+      name: slam.name // Add this line to pass the name
+    });
+  } catch (error) {
+    console.error('Error fetching entry:', error);
+    res.status(500).render('error', { error: 'Error fetching entry' });
+  }
+});
+
+app.post('/submit', upload.single('photo'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send('Please select a photo');
+    }
+
+    const slamData = {
+      ...req.body,
+      photo: `/uploads/${req.file.filename}`
+    };
+
+    const slam = new Slam(slamData);
+    await slam.save();
+    
+    // Redirect to the response page instead of thanks page
+    res.redirect(`/responses/${slam._id}`);
+  } catch (error) {
+    console.error('Error saving entry:', error);
+    res.status(500).render('error', { 
+      error: error.message || 'Error saving your entry'
+    });
+  }
+});
 
   // Server start
   const PORT = process.env.PORT || 3000;

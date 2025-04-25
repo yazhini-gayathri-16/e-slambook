@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slam Book Entry 💝</title>
+    <link rel="icon" href="/stickers/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container response-container">
+        <div class="header">
+            <h1>Thank you Darlin!</h1>
+            
+            <img src="/stickers/cat.png" class="logo" alt="logo">
+            <h1>Now this is how your response looks like😌!</h1>
+        </div>
+        
+        <div class="entry-sections">
+            <div class="entry-card yourself-section">
+                <h2>About <%= slam.name %></h2>
+                <div class="entry-item">
+                    <img src="<%= slam.photo %>" alt="Profile Photo" class="profile-photo">
+                </div>
+                <div class="entry-item">
+                    <label>Nickname:</label>
+                    <p><%= slam.nickname %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Phone:</label>
+                    <p><%= slam.phonenumber %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Instagram:</label>
+                    <p><%= slam.instagram %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Birthday:</label>
+                    <p><%= new Date(slam.birthday).toLocaleDateString() %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Current Obsession:</label>
+                    <p><%= slam.obsession %></p>
+                </div>
+            </div>
+
+            <div class="entry-card you-section">
+                <h2>Personal Corner</h2>
+                <div class="entry-item">
+                    <label>Weird Talent:</label>
+                    <p><%= slam.talent %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Dark Secret:</label>
+                    <p><%= slam.darksecret %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Favorite Food:</label>
+                    <p><%= slam.food %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Favorites:</label>
+                    <p><%= slam.favorite %></p>
+                </div>
+            </div>
+
+            <div class="entry-card us-section">
+                <h2>Our Story</h2>
+                <div class="entry-item">
+                    <label>How We Met:</label>
+                    <p><%= slam.howWeMet %></p>
+                </div>
+                <div class="entry-item">
+                    <label>First Impression:</label>
+                    <p><%= slam.firstImpression %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Chaotic Memory:</label>
+                    <p><%= slam.chaos %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Likes About Me:</label>
+                    <p><%= slam.likeAboutMe %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Dislikes About Me:</label>
+                    <p><%= slam.dislikeAboutMe %></p>
+                </div>
+                <div class="entry-item">
+                    <label>My Nickname:</label>
+                    <p><%= slam.nicknameForMe %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Favorite Thing About Me:</label>
+                    <p><%= slam.favThingAboutMe %></p>
+                </div>
+                <div class="entry-item">
+                    <label>Favorite Memory:</label>
+                    <p><%= slam.favMemory %></p>
+                </div>
+                <div class="entry-item message">
+                    <label>Message For Me:</label>
+                    <p><%= slam.message %></p>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="container">
+        <img src="/stickers/ham.png" class="sticker" alt="sticker">
+        <h2>✨ Thanks, <%= name %>! ✨</h2>
+        <p>Your entry has been added to my memory vault. 💕</p>
+        <a href="/">Add Another response!</a>
+    </div>
+    
+</body>
+</html>
