@@ -4,9 +4,15 @@ const MongoStore = require('connect-mongo');
 const multer = require('multer');
 const session = require('express-session');
 const mongoose = require('mongoose');
+const fs = require('fs');
 const connectDB = require('./connection'); // Import as a function
 require('dotenv').config();
 const Slam = require('./models/slam');
+const uploadsDir = path.join(__dirname, 'public/uploads');
+
+if (!fs.existsSync(uploadsDir)){
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 const app = express();
 const path = require('path');
@@ -25,10 +31,14 @@ const storage = multer.diskStorage({
 const upload = multer({ 
   storage: storage,
   fileFilter: function(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('Only image files are allowed!'), false);
+    // Check mimetype instead of file extension
+    if (!file.mimetype.startsWith('image/')) {
+      return cb(new Error('Please upload an image file (JPG, JPEG, PNG)'), false);
     }
     cb(null, true);
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
   }
 });
 
@@ -83,29 +93,46 @@ connectDB().then(() => {
     }
   });
 
-app.post('/submit', upload.single('photo'), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).send('Please select a photo');
-    }
-
-    const slamData = {
-      ...req.body,
-      photo: `/uploads/${req.file.filename}`
-    };
-
-    const slam = new Slam(slamData);
-    await slam.save();
-    
-    // Redirect to the response page instead of thanks page
-    res.redirect(`/responses/${slam._id}`);
-  } catch (error) {
-    console.error('Error saving entry:', error);
-    res.status(500).render('error', { 
-      error: error.message || 'Error saving your entry'
+  app.post('/submit', (req, res) => {
+    upload.single('photo')(req, res, function(err) {
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred during upload
+        return res.status(400).render('error', { 
+          error: 'File upload error: ' + err.message 
+        });
+      } else if (err) {
+        // An unknown error occurred
+        return res.status(400).render('error', { 
+          error: err.message 
+        });
+      }
+      
+      // No file was uploaded
+      if (!req.file) {
+        return res.status(400).render('error', { 
+          error: 'Please select a photo to upload' 
+        });
+      }
+  
+      // Create and save the slam entry
+      const slamData = {
+        ...req.body,
+        photo: `/uploads/${req.file.filename}`
+      };
+  
+      const slam = new Slam(slamData);
+      slam.save()
+        .then(savedSlam => {
+          res.redirect(`/responses/${savedSlam._id}`);
+        })
+        .catch(error => {
+          console.error('Error saving entry:', error);
+          res.status(500).render('error', { 
+            error: error.message || 'Error saving your entry'
+          });
+        });
     });
-  }
-});
+  });
 
   // Server start
   const PORT = process.env.PORT || 3000;
