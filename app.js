@@ -11,6 +11,8 @@ const connectDB = require('./connection'); // Import as a function
 require('dotenv').config();
 const Slam = require('./models/slam');
 const uploadsDir = path.join(__dirname, 'public/uploads');
+const stickersDir = path.join(__dirname, 'public/stickers');
+
 
 if (!fs.existsSync(uploadsDir)){
     fs.mkdirSync(uploadsDir, { recursive: true });
@@ -46,7 +48,8 @@ const upload = multer({
 // Connect to MongoDB first
 connectDB().then(() => {
   // Middleware
-  app.use(express.static('public'));
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -66,6 +69,21 @@ connectDB().then(() => {
   app.get('/', (req, res) => {
     res.render('index');
   });
+
+  [uploadsDir, stickersDir].forEach(dir => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  });
+
+  const requiredStickers = ['cat.png', 'ham.png', 'heart.png', 'logo.png'];
+const missingStickers = requiredStickers.filter(sticker => 
+  !fs.existsSync(path.join(stickersDir, sticker))
+);
+
+if (missingStickers.length > 0) {
+  console.warn('Warning: Missing sticker files:', missingStickers);
+}
 
   app.get('/export', async (req, res) => {
     try {
