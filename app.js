@@ -5,6 +5,8 @@ const multer = require('multer');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const fs = require('fs');
+const path = require('path');
+const ejs = require('ejs');
 const connectDB = require('./connection'); // Import as a function
 require('dotenv').config();
 const Slam = require('./models/slam');
@@ -15,8 +17,7 @@ if (!fs.existsSync(uploadsDir)){
 }
 
 const app = express();
-const path = require('path');
-const ejs = require('ejs');
+
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
