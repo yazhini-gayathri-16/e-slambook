@@ -254,3 +254,48 @@ label {
     }
 }
 
+.export-container {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.responses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.response-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(255, 94, 120, 0.2);
+}
+
+.response-item span {
+    font-size: 1.1em;
+    color: #5a2a6d;
+    font-weight: 500;
+}
+
+.export-btn {
+    padding: 8px 20px;
+    background-color: #ff5e78;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 3px 10px rgba(255, 94, 120, 0.2);
+}
+
+.export-btn:hover {
+    background-color: #ff2e57;
+    transform: translateY(-2px);
+}

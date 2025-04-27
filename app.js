@@ -56,22 +56,32 @@ connectDB().then(() => {
     res.render('index');
   });
 
-  
-app.get('/responses/:id', async (req, res) => {
-  try {
-    const slam = await Slam.findById(req.params.id);
-    if (!slam) {
-      return res.status(404).render('error', { error: 'Entry not found' });
+  app.get('/export', async (req, res) => {
+    try {
+      const responses = await Slam.find({}, 'name _id').sort('-createdAt');
+      res.render('export', { responses });
+    } catch (error) {
+      console.error('Error fetching responses:', error);
+      res.status(500).render('error', { error: 'Error fetching responses' });
     }
-    res.render('response', { 
-      slam,
-      name: slam.name // Add this line to pass the name
-    });
-  } catch (error) {
-    console.error('Error fetching entry:', error);
-    res.status(500).render('error', { error: 'Error fetching entry' });
-  }
-});
+  });
+  
+  app.get('/responses/:id', async (req, res) => {
+    try {
+      const slam = await Slam.findById(req.params.id);
+      if (!slam) {
+        return res.status(404).render('error', { error: 'Entry not found' });
+      }
+      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+        res.render('response', { slam, name: slam.name, layout: false });
+      } else {
+        res.render('response', { slam, name: slam.name });
+      }
+    } catch (error) {
+      console.error('Error fetching entry:', error);
+      res.status(500).render('error', { error: 'Error fetching entry' });
+    }
+  });
 
 app.post('/submit', upload.single('photo'), async (req, res) => {
   try {

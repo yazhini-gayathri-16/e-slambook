@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Export Responses 📸</title>
+    <link rel="icon" href="/stickers/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container export-container">
+        <h1>Export Responses</h1>
+        <div class="responses-list">
+            <% responses.forEach(function(response) { %>
+                <div class="response-item">
+                    <span><%= response.name %></span>
+                    <button onclick="exportResponse('<%= response._id %>')" class="export-btn">
+                        Export 📸
+                    </button>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- Hidden response container for export -->
+    <div id="export-container" style="display: none;"></div>
+
+    <script>
+        async function exportResponse(id) {
+            try {
+                // Fetch response data
+                const res = await fetch(`/responses/${id}`);
+                const html = await res.text();
+                
+                // Insert into hidden container
+                const container = document.getElementById('export-container');
+                container.innerHTML = html;
+                container.style.display = 'block';
+
+                // Convert to image
+                const element = container.querySelector('.response-container');
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+
+                // Download image
+                const link = document.createElement('a');
+                link.download = `slam-book-response-${id}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // Cleanup
+                container.style.display = 'none';
+                container.innerHTML = '';
+            } catch (error) {
+                console.error('Export failed:', error);
+                alert('Failed to export response. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
